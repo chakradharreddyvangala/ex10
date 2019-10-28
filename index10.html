@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>AngularJS Form Validation(ex10)</title>
+        		<script type="text/javascript" src="angular.min.js"></script>
+        		<style type="text/css">
+				.f1 input.ng-invalid.ng-touched
+				{
+				background-color:red;
+				}
+				.f1 input.ng-valid.ng-touched
+				{
+				background-color:green;
+				}
+		</style>
+	</head>
+<body ng-app="formApp" ng-controller="fctrl">
+<form name="form" novalidate class="f1">
+Name : <input type="text" ng-model="employee.name" required><br>
+E-mail : <input type="email" ng-model="employee.email" required><br>
+Role : <input type="radio" ng-model="employee.role" value="development">Development
+<input type="radio" ng-model="employee.role" value="testing">Testing<br><br>
+<input type="button" ng-click="reset()" value="Reset">
+<input type="submit" ng-disabled="form.$invalid" ng-click="save(employee)" value="Submit" />
+</form>
+  <p>Employee Form = {{employee}}</p>
+  <p>Master = {{master}}</p>
+   <script>
+		var app = angular.module('formApp',[]);
+		app.controller('fctrl', function($scope){
+		$scope.master = {};
+		$scope.save= function(employee) {
+			$scope.master = angular.copy(employee);
+		}
+		$scope.reset = function() {
+			$scope.employee = angular.copy($scope.master);
+		}
+	});
+	</script>
+	</body>
+</html>
